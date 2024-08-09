@@ -39,32 +39,17 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### `AUTOMATION OF THE PROJECT (DEPLOYING APP TO AWS ECS)`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Create AWS free tier account.
+2. Search for ECS (Elastic Container Service) and ECR (Elastic Container Registry).
+3. Go to ECS and Create new cluster (fragate cluster known as serverless).
+4. Now create a new task definition for your fragate cluster and define the resources to be used by the cluster.
+5. Now create a service under your cluster add your deployment configuration (ECR Name and ECR URL).
+6. Now push your code and Dockerfile to the GitHub Repository.
+7. Create a AWS workflow in the actions tab.
+8. Add necessary secrets for the further use like aws_secret_key, aws_secret_access_key, aws_region, etc.
+9. Now update the workflow file with the relevant steps.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ ### `STEPS IN THE CI/CD PIPELINE`
+ 1.
