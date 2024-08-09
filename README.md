@@ -52,4 +52,13 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 9. Now update the workflow file with the relevant steps.
 
  ### `STEPS IN THE CI/CD PIPELINE`
- 1.
+ 1. Checkout Source (Checking the changes in the Master Branch)
+ 2. Configure AWS Credentials (Checking AWS credentials and Login to the AWS)
+ 3. Login to Amazon ECR 
+ 4. Fetch Previous Task Definition ARN (fetching the previous successful build ARN for the rollback functionality)
+ 5. Build, tag and Push image to Amazon ECR (Build the application and push it to the ECR with the Latest tag)
+ 6. Fill in the new image ID in the Amazon ECS task definition
+ 7. Deploy Amazon ECS task definition (Deploying to the ECS)
+ 8. Run Integration Tests
+ 9. Rollback if Test fails
+ 10. Post Login to Amazon ECR and Completion of the pipeline
