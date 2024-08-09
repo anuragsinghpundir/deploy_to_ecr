@@ -8,6 +8,11 @@ jobs:
   build-and-deploy:
     runs-on: [ubuntu-latest]
     steps:
+      - name: Fetch Previous Task Definition ARN
+        id: fetch-previous-task-def
+        run: |
+          PREVIOUS_TASK_DEFINITION=$(aws ecs describe-services --cluster ve3-app-serverless --services ve3-app-service-serverless --query "services[0].taskDefinition" --output text)
+          echo "previous_task_definition=$PREVIOUS_TASK_DEFINITION" >> $GITHUB_ENV    
       - name: Checkout source
         uses: actions/checkout@v3
       - name: Configure AWS credentials
@@ -50,11 +55,6 @@ jobs:
           service: ve3-app-service-serverless
           cluster: ve3-app-serverless
           wait-for-service-stability: true
-      - name: Fetch Previous Task Definition ARN
-        id: fetch-previous-task-def
-        run: |
-          PREVIOUS_TASK_DEFINITION=$(aws ecs describe-services --cluster ve3-app-serverless --services ve3-app-service-serverless --query "services[0].taskDefinition" --output text)
-          echo "previous_task_definition=$PREVIOUS_TASK_DEFINITION" >> $GITHUB_ENV
       - name: Run Integration Tests
         id: integration-tests
         run: |
