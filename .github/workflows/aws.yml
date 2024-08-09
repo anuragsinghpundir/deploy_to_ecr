@@ -40,13 +40,18 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ve3-app-task-definition.json 
+          task-definition: ve3-app-task-definition-serverless.json 
           container-name: ve3-assignment
           image: ${{ steps.build-image.outputs.image }}    
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ve3-app-service
-          cluster: ve3-app
-          wait-for-service-stability: true   
+          service: ve3-app-service-serverless
+          cluster: ve3-app-serverless
+          wait-for-service-stability: true
+      - name: Rollback if Tests Fail
+        if: ${{ failure() }}
+        run: |
+          echo "Integration tests failed. Initiating rollback..."
+          aws ecs update-service --cluster ve3-app --service ve3-app-service --force-new-deployment --task-definition <previous-task-definition-arn>
