@@ -50,3 +50,14 @@ jobs:
           service: ve3-app-service-serverless
           cluster: ve3-app-serverless
           wait-for-service-stability: true
+      - name: Run Integration Tests
+        id: integration-tests
+        run: |
+          # Replace with actual test commands or scripts
+          curl -f http://13.201.185.203/ | exit 1
+
+      - name: Rollback if Tests Fail
+        if: ${{ failure() }}
+        run: |
+          echo "Integration tests failed. Initiating rollback..."
+          aws ecs update-service --cluster ve3-app --service ve3-app-service --force-new-deployment --task-definition <previous-task-definition-arn>
