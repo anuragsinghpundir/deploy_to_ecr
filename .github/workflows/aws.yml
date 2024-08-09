@@ -59,7 +59,7 @@ jobs:
         id: integration-tests
         run: |
           # Replace with actual test commands or scripts
-          curl -f http://13.201.185.203/ || exit 1
+          curl -f https://google.com || exit 1
 
       - name: Rollback if Tests Fail
         if: ${{ failure() }}
